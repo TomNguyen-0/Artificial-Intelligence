@@ -1,0 +1,37 @@
+
+from boardtypes import TileBoard
+
+def driver():
+    size = 8
+    b = TileBoard(size)
+    solved = b.solved()
+    while not solved:
+        print(b)
+        actions = b.get_actions()
+        action_labels=[chr(ord('a')+idx) for idx in range (len(actions))]
+        print('hello world ',action_labels)
+        print("valid actions (delto row, delta col): ")
+        for(label, move) in zip(action_labels,actions):
+            print("{} : {}.".format(label,move),end="")
+        print()
+        useraction=None
+        prompt = "move choice: "
+        while useraction not in action_labels:
+            useraction = input(prompt)
+            prompt = "bad choice"
+        print(useraction)
+        actionidx = ord(useraction)-ord('a')
+        b=b.move(actions[actionidx])
+        solved=b.solved()
+        print("congratulation")
+        
+        
+if __name__ == '__main__':
+    driver()
+    
+
+
+#comments:
+'''
+menu.append(chr(ord('A')+number_of_possible_moves))
+'''
